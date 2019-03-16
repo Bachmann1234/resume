@@ -19,7 +19,7 @@
 
 \ProvidesClass{yaac-another-awesome-cv}[2018/07/19  v1.9.2 'YAAC: Another Awesome CV' Class]
 
-\LoadClass[a4paper]{article}
+\LoadClass[letterpaper]{article}
 
 \newif\if@showLinks   \@showLinksfalse
 
@@ -56,7 +56,7 @@
 
 % Dependences
 %A Few Useful Packages
-\RequirePackage[english,french]{babel}
+\RequirePackage[english]{babel}
 \RequirePackage[utf8]{luainputenc}
 \RequirePackage{fontspec} 					                 % for loading fonts
 \RequirePackage{url,parskip} 	    % other packages for formatting
@@ -224,11 +224,11 @@
 
 % Render author's linked-in (optional)
 % Usage: \linkedin{<linked-in-nick>}
-\newcommand*{\linkedin}[1]{\sociallink{\linkedinSymbol}{http://www.linkedin.com/in/#1/fr}{linkedin.com/in/#1}}
+\newcommand*{\linkedin}[1]{\sociallink{\linkedinSymbol}{http://www.linkedin.com/in/#1/en}{linkedin.com/in/#1}}
 
 % Render author's viadeo(optional)
 % Usage: \viadeo{<viadeo-nick>}
-\newcommand*{\viadeo}[1]{\sociallink{\viadeoSymbol}{http://www.viadeo.com/fr/profile/#1}{viadeo.com/fr/profile/#1}} 
+\newcommand*{\viadeo}[1]{\sociallink{\viadeoSymbol}{http://www.viadeo.com/en/profile/#1}{viadeo.com/en/profile/#1}} 
 
 % Render author's github (optional)
 % Usage: \github{<github-nick>}
