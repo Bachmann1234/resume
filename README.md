@@ -4,7 +4,7 @@ Made from [This overleaf template](https://www.overleaf.com/latex/templates/awes
 
 ## Build the resume
 
-`Latexmk -lualatex`
+`latexmk -lualatex cv.tex`
 
 ## Clear the latex temp files
 
