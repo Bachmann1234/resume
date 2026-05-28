@@ -60,7 +60,7 @@
 \RequirePackage[utf8]{luainputenc}
 \RequirePackage{fontspec} 					                 % for loading fonts
 \RequirePackage{url,parskip} 	    % other packages for formatting
-\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage[dvipsnames]{xcolor}
 \RequirePackage{fullpage}
 \RequirePackage[margin=1.5cm]{geometry}
 \RequirePackage{fontawesome}
@@ -140,7 +140,7 @@
 \hyphenation{im-pre-se}
 
 % Setup fonts
-\defaultfontfeatures{Mapping=tex-text}
+\defaultfontfeatures{Ligatures=TeX}
 %
 
 % Define font to use according to localFont option
@@ -472,9 +472,8 @@
 %   {<Abstract>}
 \newcommand\talk[3]{
   \begin{minipage}[t]{\dimexpr(\linewidth) - 1.5em}
-    \textbf{\textsc{#1}} \hfill \textsc{#2}\smallskip\\
-    #3\\
-    \smallskip\\
+    \textbf{\textsc{#1}} \hfill \textsc{#2}\par\smallskip
+    #3\par\smallskip
   \end{minipage}
   \\*
 }
