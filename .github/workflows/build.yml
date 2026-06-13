@@ -40,14 +40,16 @@ jobs:
       - name: Render LaTeX + resume.json
         run: python build.py --no-pdf
 
-      # Compiles build/cv.tex with lualatex inside a full TeX Live container, so
-      # every package the CV class needs (fontspec, fontawesome, tcolorbox,
-      # tikz, …) is already present. Outputs build/cv.pdf.
-      - name: Compile PDF
+      # Compiles both résumés with lualatex inside a full TeX Live container, so
+      # fontspec and the Source Sans Pro fonts are available. Outputs cv.pdf
+      # (modern, site-facing) and cv-ats.pdf (plain, ATS).
+      - name: Compile PDFs
         uses: xu-cheng/latex-action@v4
         with:
           working_directory: build
-          root_file: cv.tex
+          root_file: |
+            cv.tex
+            cv-ats.tex
           latexmk_use_lualatex: true
 
       - name: Publish to the "latest" release
@@ -58,4 +60,5 @@ jobs:
           body: Auto-built from resume.yaml. Assets are regenerated on every push to main.
           files: |
             build/cv.pdf
+            build/cv-ats.pdf
             build/resume.json

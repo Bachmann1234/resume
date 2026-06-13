@@ -1,19 +1,61 @@
-% !TEX TS-program = luatex
 % GENERATED FROM resume.yaml — do not edit by hand. Run: python build.py
-\documentclass[localFont,alternative]{yaac-another-awesome-cv}
-\name{\VAR{ name.first | tex }}{\VAR{ name.last | tex }}
-\tagline{\VAR{ tagline | tex }}
-\socialinfo{
-	\linkedin{\VAR{ social.linkedin | tex }}
-	\github{\VAR{ social.github | tex }}\\
-	\address{\VAR{ social.address | tex }}
-}
+% Primary résumé: modern single column, Source Sans Pro + a forest-green accent
+% that echoes mattbachmann.dev. This is what the website publishes.
+\documentclass[11pt]{article}
+\usepackage[margin=0.62in]{geometry}
+\usepackage{fontspec}
+\setmainfont{SourceSansPro-Regular}[
+  Path = fonts/, Extension = .otf,
+  BoldFont = SourceSansPro-Semibold,
+  ItalicFont = SourceSansPro-It,
+  BoldItalicFont = SourceSansPro-SemiboldIt,
+]
+\newfontfamily\thin{SourceSansPro-Light}[Path = fonts/, Extension = .otf]
+\usepackage{xcolor}
+\definecolor{accent}{HTML}{286642}
+\definecolor{muted}{HTML}{6B6B6B}
+\usepackage{enumitem}
+\setlist[itemize]{label={\textcolor{accent}{\textbullet}}, leftmargin=1.2em, itemsep=1.5pt, topsep=2pt, parsep=0pt}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{accent}}{}{0pt}{}
+\titlespacing{\section}{0pt}{9pt}{4pt}
+\usepackage[hidelinks]{hyperref}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
 
 \begin{document}
-    \makecvheader
-	\input{section_headline}
-	\input{section_competences}
-	\input{section_experience}
-	\input{section_education}
-	\input{section_talks}
+
+{\thin\fontsize{27}{31}\selectfont \VAR{ name.full | tex }}\\[3pt]
+{\color{accent}\VAR{ tagline | tex }}\\[4pt]
+{\color{muted}\small \VAR{ social.address | tex } \quad linkedin.com/in/\VAR{ social.linkedin | tex } \quad github.com/\VAR{ social.github | tex }}
+
+\vspace{5pt}
+\VAR{ summary | tex }
+
+\section*{Experience}
+\BLOCK{ for job in experience }
+{\bfseries \VAR{ job.title | tex }}\quad{\color{accent}\VAR{ job.company | tex }}\BLOCK{ if job.note } {\color{muted}\small(\VAR{ job.note | tex })}\BLOCK{ endif }\hfill{\color{muted}\small \VAR{ job.date_start | tex }\BLOCK{ if job.date_start and job.date_end } – \BLOCK{ endif }\VAR{ job.date_end | tex }}\\
+\begin{itemize}
+\BLOCK{ for h in job.highlights }
+\item \VAR{ h | tex }
+\BLOCK{ endfor }
+\end{itemize}
+\vspace{2pt}
+\BLOCK{ endfor }
+
+\section*{Skills}
+\BLOCK{ for g in skills }
+{\bfseries\color{accent}\VAR{ g.category | tex }.}~ \VAR{ g['items'] | join(', ') | tex }\\[3pt]
+\BLOCK{ endfor }
+
+\section*{Education}
+\BLOCK{ for e in education }
+{\bfseries \VAR{ e.institution | tex }}, \VAR{ e.degree | tex }, \VAR{ e.field | tex }\hfill{\color{muted}\small \VAR{ e.year | tex }}\\[3pt]
+\BLOCK{ endfor }
+
+\section*{Talks}
+\BLOCK{ for t in talks }
+{\bfseries \VAR{ t.title | tex }}\quad{\color{muted}\small \VAR{ t.venue | tex }}\\[3pt]
+\BLOCK{ endfor }
+
 \end{document}

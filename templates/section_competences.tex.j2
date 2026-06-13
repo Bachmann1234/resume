@@ -1,8 +1,0 @@
-% GENERATED FROM resume.yaml — do not edit by hand. Run: python build.py
-\sectionTitle{Skills}{\faTasks}
-
-\begin{keywords}
-\BLOCK{ for group in skills }
-		\keywordsentry{\VAR{ group.category | tex }}{\VAR{ group['items'] | join(', ') | tex }}
-\BLOCK{ endfor }
-\end{keywords}

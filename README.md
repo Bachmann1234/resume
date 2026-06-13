@@ -4,14 +4,19 @@ Single source of truth: [`resume.yaml`](resume.yaml). Everything else is
 generated from it.
 
 ```
-resume.yaml ──(templates/ + build.py)──┬──> build/cv.pdf      (LaTeX résumé)
+resume.yaml ──(templates/ + build.py)──┬──> build/cv.pdf      (modern PDF, site download)
+                                        ├──> build/cv-ats.pdf  (plain ATS PDF)
                                         └──> build/resume.json (feeds mattbachmann.dev)
 ```
 
-Edit `resume.yaml`, run the build, and **both** the PDF and the website content
-update — no second copy to maintain. The LaTeX layout comes from
-[this Overleaf template](https://www.overleaf.com/latex/templates/awesome-source-cv/wrdjtkkytqcw)
-with minor changes; `templates/*.tex.j2` render it from the YAML.
+Edit `resume.yaml`, run the build, and the PDFs **and** the website content all
+update — no second copy to maintain. Two LaTeX templates render from the YAML:
+
+- `templates/cv.tex.j2` — the primary résumé (modern, Source Sans Pro, green
+  accent matching the site). This is what mattbachmann.dev links as the download.
+- `templates/cv-ats.tex.j2` — a plain, single-column, ATS-parser-friendly
+  version. Published to the release but not linked on the site; use it for
+  application portals.
 
 ## Setup (macOS)
 
@@ -47,18 +52,18 @@ Edit `resume.yaml`. Highlights:
 - Content is plain text — the templates handle LaTeX escaping and the JSON stays
   clean for the website.
 
-To change the PDF's *visual* style, edit `templates/*.tex.j2` or
-`yaac-another-awesome-cv.cls`.
+To change a PDF's *visual* style, edit the corresponding `templates/*.tex.j2`.
 
 ## CI
 
 `.github/workflows/build.yml` rebuilds on every push to `main` and publishes
-`cv.pdf` + `resume.json` to a rolling `latest` release. The
+`cv.pdf`, `cv-ats.pdf`, and `resume.json` to a rolling `latest` release. The
 [mattbachmann.dev portfolio](https://github.com/Bachmann1234/Portfolio) fetches
 them from there at deploy time:
 
 ```
 https://github.com/Bachmann1234/resume/releases/download/latest/cv.pdf
+https://github.com/Bachmann1234/resume/releases/download/latest/cv-ats.pdf
 https://github.com/Bachmann1234/resume/releases/download/latest/resume.json
 ```
 

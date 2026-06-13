@@ -26,14 +26,12 @@ ROOT = Path(__file__).parent.resolve()
 TEMPLATES = ROOT / "templates"
 BUILD = ROOT / "build"
 
-# Sections that become \input files, plus the main document.
-SECTION_TEMPLATES = [
-    "section_headline",
-    "section_competences",
-    "section_experience",
-    "section_education",
-    "section_talks",
-]
+# Self-contained résumé templates, each rendering the whole CV and compiling to
+# its own PDF.
+#   cv     — primary, modern look; this is what the website publishes.
+#   cv-ats — plain, ATS-parser-friendly; published to the release but not linked
+#            on the site.
+PDF_DOCS = ["cv", "cv-ats"]
 
 # Characters that must be escaped to appear literally in LaTeX. Order matters:
 # backslash first so we don't double-escape the replacements we insert.
@@ -88,14 +86,13 @@ def load_data() -> dict:
 
 def render_latex(env: jinja2.Environment, data: dict) -> None:
     BUILD.mkdir(exist_ok=True)
-    # Make the build dir self-contained so lualatex finds the class and fonts
-    # (the .cls loads fonts via a cwd-relative `Path = fonts/`).
-    for name in ("yaac-another-awesome-cv.cls", "fonts"):
-        link = BUILD / name
-        if not link.exists():
-            os.symlink(ROOT / name, link)
+    # The templates load Source Sans Pro via a cwd-relative `Path = fonts/`, so
+    # make the fonts available inside the build dir.
+    link = BUILD / "fonts"
+    if not link.exists():
+        os.symlink(ROOT / "fonts", link)
 
-    for name in ["cv", *SECTION_TEMPLATES]:
+    for name in PDF_DOCS:
         rendered = env.get_template(f"{name}.tex.j2").render(**data)
         (BUILD / f"{name}.tex").write_text(rendered, encoding="utf-8")
 
@@ -118,11 +115,12 @@ def write_json(data: dict) -> None:
 def build_pdf() -> None:
     if shutil.which("latexmk") is None:
         sys.exit("latexmk not found on PATH — install a TeX distribution, or use --no-pdf")
-    subprocess.run(
-        ["latexmk", "-lualatex", "-interaction=nonstopmode", "-halt-on-error", "cv.tex"],
-        cwd=BUILD,
-        check=True,
-    )
+    for doc in PDF_DOCS:
+        subprocess.run(
+            ["latexmk", "-lualatex", "-interaction=nonstopmode", "-halt-on-error", f"{doc}.tex"],
+            cwd=BUILD,
+            check=True,
+        )
 
 
 def main() -> None:
@@ -136,7 +134,7 @@ def main() -> None:
     print(f"Rendered LaTeX + resume.json into {BUILD}")
     if not args.no_pdf:
         build_pdf()
-        print(f"Built {BUILD / 'cv.pdf'}")
+        print("Built " + ", ".join(str(BUILD / f"{d}.pdf") for d in PDF_DOCS))
 
 
 if __name__ == "__main__":

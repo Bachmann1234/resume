@@ -1,9 +1,0 @@
-% GENERATED FROM resume.yaml — do not edit by hand. Run: python build.py
-\sectionTitle{Education}{\faMortarBoard}
-
-\begin{scholarship}
-\BLOCK{ for e in education }
-	\scholarshipentry{\VAR{ e.year | tex }}
-					{\textbf{\VAR{ e.institution | tex }} \emph{\VAR{ e.degree | tex }} \VAR{ e.field | tex }}
-\BLOCK{ endfor }
-\end{scholarship}

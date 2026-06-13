@@ -1,0 +1,51 @@
+% GENERATED FROM resume.yaml — do not edit by hand. Run: python build.py
+% ATS-friendly variant: single column, standard fonts, no icons or tables,
+% everything as plain selectable text for résumé parsers.
+\documentclass[10pt]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\setlist[itemize]{leftmargin=1.2em, itemsep=0.5pt, topsep=1pt, parsep=0pt}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\vspace{1pt}\hrule]
+\titlespacing{\section}{0pt}{7pt}{3pt}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+
+\begin{document}
+
+{\LARGE\bfseries \VAR{ name.full | tex }}\\[3pt]
+\VAR{ tagline | tex }\\[3pt]
+\VAR{ social.address | tex } \textbar{} linkedin.com/in/\VAR{ social.linkedin | tex } \textbar{} github.com/\VAR{ social.github | tex }
+
+\section*{Summary}
+\VAR{ summary | tex }
+
+\section*{Skills}
+\BLOCK{ for g in skills }
+\textbf{\VAR{ g.category | tex }:} \VAR{ g['items'] | join(', ') | tex }\\[2pt]
+\BLOCK{ endfor }
+
+\section*{Experience}
+\BLOCK{ for job in experience }
+\textbf{\VAR{ job.title | tex }}, \VAR{ job.company | tex }\BLOCK{ if job.note } (\VAR{ job.note | tex })\BLOCK{ endif }\hfill \VAR{ job.date_start | tex }\BLOCK{ if job.date_start and job.date_end } -- \BLOCK{ endif }\VAR{ job.date_end | tex }\\
+\begin{itemize}
+\BLOCK{ for h in job.highlights }
+\item \VAR{ h | tex }
+\BLOCK{ endfor }
+\end{itemize}
+\BLOCK{ if job.tech }\textit{Tools:} \VAR{ job.tech | join(', ') | tex }\\\BLOCK{ endif }
+\vspace{3pt}
+\BLOCK{ endfor }
+
+\section*{Education}
+\BLOCK{ for e in education }
+\textbf{\VAR{ e.institution | tex }}, \VAR{ e.degree | tex }, \VAR{ e.field | tex }\hfill \VAR{ e.year | tex }\\[2pt]
+\BLOCK{ endfor }
+
+\section*{Talks}
+\BLOCK{ for t in talks }
+\textbf{\VAR{ t.title | tex }} -- \VAR{ t.venue | tex }\\[2pt]
+\BLOCK{ endfor }
+
+\end{document}
