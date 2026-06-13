@@ -1,0 +1,53 @@
+name: Build résumé
+
+# resume.yaml is the single source of truth. On every push to main this builds
+# both outputs and publishes them to a rolling "latest" release so the
+# mattbachmann.dev portfolio can fetch them at deploy time:
+#   - build/cv.pdf       the LaTeX résumé
+#   - build/resume.json  normalized content for the website's résumé page
+#
+# Stable download URLs:
+#   https://github.com/Bachmann1234/resume/releases/download/latest/cv.pdf
+#   https://github.com/Bachmann1234/resume/releases/download/latest/resume.json
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Python deps
+        run: pip install -r requirements.txt
+
+      # scheme-full is heavy on the first run but the action caches the TeX Live
+      # tree, so later runs are fast. It guarantees every package the CV class
+      # needs (fontspec, fontawesome, tcolorbox, tikz, latexmk, …) is present.
+      - name: Set up TeX Live
+        uses: teatimeguest/setup-texlive-action@v3
+        with:
+          packages: scheme-full
+
+      - name: Build PDF + JSON
+        run: python build.py
+
+      - name: Publish to the "latest" release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest
+          name: Latest résumé build
+          body: Auto-built from resume.yaml. Assets are regenerated on every push to main.
+          files: |
+            build/cv.pdf
+            build/resume.json

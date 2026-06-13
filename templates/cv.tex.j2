@@ -1,0 +1,20 @@
+% !TEX TS-program = luatex
+% GENERATED FROM resume.yaml — do not edit by hand. Run: python build.py
+\documentclass[localFont,alternative]{yaac-another-awesome-cv}
+\name{\VAR{ name.first | tex }}{\VAR{ name.last | tex }}
+\tagline{\VAR{ tagline | tex }}
+\socialinfo{
+	\linkedin{\VAR{ social.linkedin | tex }}
+	\github{\VAR{ social.github | tex }}\\
+	\email{\VAR{ social.email | tex }}\\
+	\address{\VAR{ social.address | tex }}
+}
+
+\begin{document}
+    \makecvheader
+	\input{section_headline}
+	\input{section_competences}
+	\input{section_experience}
+	\input{section_education}
+	\input{section_talks}
+\end{document}

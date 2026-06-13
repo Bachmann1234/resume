@@ -1,0 +1,162 @@
+# =============================================================================
+# Single source of truth for Matt Bachmann's résumé.
+#
+# Edit this file. `python build.py` regenerates BOTH:
+#   - build/cv.pdf      (LaTeX, via templates/*.tex.j2)
+#   - build/resume.json (consumed by the mattbachmann.dev portfolio site)
+#
+# Content here is plain/semantic — no LaTeX. The templates handle LaTeX
+# escaping ($, %, & ...) and formatting. Likewise resume.json is clean text.
+# =============================================================================
+
+name:
+  first: Matthew
+  last: Bachmann
+
+tagline: "Staff Software Engineer | Engineering Leader | Fintech & Payments"
+
+social:
+  linkedin: matt-bachmann-34b56850
+  github: bachmann1234
+  email: bachmann.matt@gmail.com
+  address: "Massachusetts, USA"
+
+# Short professional summary (the headline paragraph).
+summary: >-
+  A staff engineer with a former manager's instincts. Spends his time on
+  ambiguous 0-to-1 fintech work, taking payments products from founding plan to
+  GA, and keeping product, legal, compliance, and engineering pointed in the
+  same direction long enough to launch. Participates in open source development
+  and technical conferences. Most valuable on problems that are part technical,
+  part organizational.
+
+# Skills, grouped. Order is preserved.
+skills:
+  - category: Languages
+    items: [Kotlin, Java, Python, SQL, TypeScript, Javascript, HTML, CSS, Bash, Regular Expressions]
+  - category: Frameworks
+    items: [Dropwizard, Flask, React, GraphQL, Spring, Spring Boot]
+  - category: Databases
+    items: [PostgreSQL, DynamoDB, Redis, MySQL]
+  - category: Development Tools
+    items: [IntelliJ IDEA, Git, Vim, VSCode, Claude Code, Cursor, Copilot]
+  - category: Build Tools
+    items: [Gradle, Maven, Poetry, Pip, Virtualenv, Tox, Travis, Jenkins, Github Actions]
+  - category: Distributed Systems Technologies
+    items: [Kubernetes, Apache Pulsar, Kafka, SQS, Docker, Zookeeper, Thrift, Prometheus, Grafana, Kibana]
+  - category: Cloud Services
+    items: [AWS, Heroku, Google Compute Engine]
+
+education:
+  - year: "2012"
+    institution: Worcester Polytechnic Institute
+    degree: Master Of Science
+    field: Computer Science
+  - year: "2009"
+    institution: Dickinson College
+    degree: Bachelor Of Science (Honors)
+    field: Computer Science
+
+# Work experience. Each entry renders as one role.
+#
+#   date_end / date_start : right-hand date range on the PDF (either may be "").
+#   note                  : small parenthetical after the company name.
+#   group_with_previous   : true => same company as the entry above; suppresses
+#                           the LaTeX separator so stacked roles read as a group
+#                           (e.g. the three Fitbit roles).
+experience:
+  - title: Staff Software Engineer
+    company: Toast
+    note: Security Champion
+    date_end: Present
+    date_start: March 2022
+    highlights:
+      - Founded and tech-led the Toast Billpay team and product from inception to launch, growing both the tech and the team.
+      - Drove the Toast Boost program across three engineering lines of business, plus product, legal, and compliance, to launch a pilot for an offers engine targeting $100M in network demand for 2026.
+      - "Joined a 2025 tiger team to unify Toast Cash settlements: replaced a monthly manual process with a daily automated one using the Message Outbox pattern, unblocking a Toast Cash rollout to hundreds of thousands of diners."
+      - Joined the Capital Lending team building out new loan functionality.
+    tech: [Kotlin, Java, Python, Dropwizard, PostgreSQL, DynamoDB, Apache Pulsar, SQS, GraphQL, AWS, Adyen, Claude Code]
+
+  - title: Master Software Engineer At The Manager Level
+    company: Capital One Finance
+    date_end: February 2022
+    date_start: October 2021
+    highlights:
+      - Tech Lead for team responsible for building financial products.
+      - Worked with leaders from Lola and Capital One to transition the Lola team and to shut down parts of Lola's operation.
+    tech: [Python, Flask, PostgreSQL, AWS]
+
+  - title: Engineering Manager
+    company: Lola.com
+    note: Acquired by Capital One Finance in October 2021
+    date_end: October 2021
+    date_start: May 2019
+    highlights:
+      - Led a 7-person engineering team by establishing a Scrum process and building out a suite of tools to streamline our travel agents workflows. These tools and workflows allowed agents to handle a 300% increase in booking volume.
+      - Tapped to take over the recently launched spend management platform built after Covid-19 forced a pivot of the business. Led a team of 6 to build out functionality as the spend customer base increased 400%. This product was the catalyst for our eventual acquisition by Capital One.
+      - Established a system for individual contributors across teams to discuss architectural issues and lobby management to level up Lola's Technical infrastructure.
+      - Championed, managed, and participated in the project that successfully ported all our Python 2 code to Python 3 ensuring the future maintainability and health of the entire system.
+    tech: [Python, Javascript, Starlette, Flask, SQLAlchemy, PostgreSQL, Redis, Graphql, React, AWS, Kubernetes]
+
+  - title: Lead Software Engineer
+    company: Fitbit
+    note: September 2018 - May 2019
+    date_end: May 2019
+    date_start: January 2016
+    highlights:
+      - Led his team's effort to transition several services from Softlayer into Google Compute Engine. Documenting and spreading the knowledge gained to enable teams following them to handle their move more efficiently.
+      - Designed and built tooling to analyze device battery life, prevent warranty fraud, and improve customer support by building visibility into products.
+    tech: []
+
+  - title: Senior Software Engineer
+    company: Fitbit
+    note: March 2017 - September 2018
+    date_end: ""
+    date_start: ""
+    group_with_previous: true
+    highlights:
+      - Assisted platform teams in refactoring central domain models to enable the transition from a monolithic system to microservices.
+      - Managed one of the cross-team, multi-national, cross-functional projects to ensure Fitbit's compliance to the EU's GDPR law.
+    tech: []
+
+  - title: Software Engineer
+    company: Fitbit
+    note: January 2016 - March 2017
+    date_end: ""
+    date_start: ""
+    group_with_previous: true
+    highlights:
+      - Spearheaded the commerce platform SOX compliance efforts. Worked with auditors and stakeholders to ensure engineering provided appropriate audits and controls. This included a complete revamp of deployment pipeline and the authentication mechanisms of the commerce backend.
+      - "Built full stack functionality to support product sales on the Fitbit.com commerce platform. Including but not limited to: product warranties, chargeback fraud prevention, and product launch support."
+    tech: [Java, Python, Spring, Ansible, Mysql, Cassandra, Zookeeper, Prometheus, Kibana, Grafana, Kafka, Finagle, Thrift, Google Compute Engine, JavaScript, Ember.js, JSP, Jenkins]
+
+  - title: Software Engineer
+    company: Cloudlock
+    date_end: December 2015
+    date_start: October 2012
+    highlights:
+      - Developed compliance and DLP applications on Google's App Engine and Amazon's AWS cloud platforms.
+      - Built an internal service that scans millions of items per day for PCI, PII, Login Credentials and other information companies want to track in their various cloud environments.
+      - Developed features around several of Google's APIs including Drive, the Admin SDK, Google+ and others.
+    tech: [Python, Google App Engine, AngularJS, Java, pytest, PDFBox, Apache POI, Librato, Flask, Django, Postgres, Jinja, Jenkins]
+
+  - title: Software Engineer
+    company: CrunchTime! Information Systems
+    date_end: September 2012
+    date_start: June 2011
+    highlights:
+      - Developed and maintained a web application to assist restaurant managers in cutting costs by managing labor and inventory.
+      - Implemented several reports pages and ported legacy Perl code to modern Java.
+      - Assisted in transitioning from an Ant based build to a Maven build.
+    tech: [Java, Perl, Spring, JavaScript, jQuery, MyBatis, Oracle Database, JSP]
+
+talks:
+  - title: "Transitioning from developing software to developing people: A firsthand experience"
+    venue: PyCon 2020
+    description: In this talk I intend to talk specifically about the role of a manager of a single team. I will go over the types of problems a manager is responsible for and discuss the value a good manager can bring to a team/organization. I will help attendees understand the perspective of their current manager and help them decide if management is something they would be interested in trying out themselves.
+  - title: "Better Testing Less Code: Property Based Testing With Python"
+    venue: PyCon 2016, QCon 2017
+    description: Standard unit tests have developers test specific inputs and outputs. This works, but often what breaks code are the cases we did not think about. Property based testing has developers define properties of output and has the computer explore the possible inputs to verify these properties. This talk will introduce property based testing and provide real world examples and patterns.
+  - title: Diff Cover
+    venue: PyCon lightning talk 2015
+    description: Diff Cover is a package I maintain which allows teams to improve test coverage and code quality over time by running tools over diffs rather than the entire project. It is currently downloaded over fifty-five thousand times per day. In this PyCon lightning talk I introduce the library by using it to assist Batman with his Batputer.
