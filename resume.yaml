@@ -25,22 +25,24 @@ summary: >-
   A staff engineer with a former manager's instincts. Spends his time on
   ambiguous 0-to-1 fintech work, taking payments products from founding plan to
   GA, and keeping product, legal, compliance, and engineering pointed in the
-  same direction long enough to launch. Participates in open source development
-  and technical conferences. Most valuable on problems that are part technical,
-  part organizational.
+  same direction long enough to launch. A daily Claude Code user, fluent in
+  agentic development — authoring skills and plugins, working with MCP, and
+  building fully agentic workflows. Maintains open-source projects and has spoken at
+  technical conferences. Most valuable on problems that are part technical, part
+  organizational.
 
 # Skills, grouped. Order is preserved.
 skills:
   - category: Languages
     items: [Kotlin, Java, Python, SQL, TypeScript, Javascript, HTML, CSS, Bash, Regular Expressions]
+  - category: AI Tooling
+    items: [Claude Code, MCP, Cursor, Copilot]
   - category: Frameworks
     items: [Dropwizard, Flask, React, GraphQL, Spring, Spring Boot]
   - category: Databases
     items: [PostgreSQL, DynamoDB, Redis, MySQL]
   - category: Development Tools
-    items: [IntelliJ IDEA, Git, Vim, VSCode, Claude Code, Cursor, Copilot]
-  - category: Build Tools
-    items: [Gradle, Maven, Poetry, Pip, Virtualenv, Tox, Travis, Jenkins, Github Actions]
+    items: [IntelliJ IDEA, Git, Vim, VSCode]
   - category: Distributed Systems Technologies
     items: [Kubernetes, Apache Pulsar, Kafka, SQS, Docker, Zookeeper, Thrift, Prometheus, Grafana, Kibana]
   - category: Cloud Services
@@ -72,6 +74,7 @@ experience:
     highlights:
       - Founded and tech-led the Toast Billpay team and product from inception to launch, growing both the tech and the team.
       - Drove the Toast Boost program across three engineering lines of business, plus product, legal, and compliance, to launch a pilot for an offers engine targeting $100M in network demand for 2026.
+      - Built internal Claude Code plugins and skills adopted by other engineers, and actively contributes to a team-wide agentic-development practice that spans planning, code authoring, PR review, and increasingly verification.
       - "Joined a 2025 tiger team to unify Toast Cash settlements: replaced a monthly manual process with a daily automated one using the Message Outbox pattern, unblocking a Toast Cash rollout to hundreds of thousands of diners."
       - Joined the Capital Lending team building out new loan functionality.
     tech: [Kotlin, Java, Python, Dropwizard, PostgreSQL, DynamoDB, Apache Pulsar, SQS, GraphQL, AWS, Adyen, Claude Code]
