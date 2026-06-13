@@ -31,16 +31,20 @@ jobs:
       - name: Install Python deps
         run: pip install -r requirements.txt
 
-      # scheme-full is heavy on the first run but the action caches the TeX Live
-      # tree, so later runs are fast. It guarantees every package the CV class
-      # needs (fontspec, fontawesome, tcolorbox, tikz, latexmk, …) is present.
-      - name: Set up TeX Live
-        uses: teatimeguest/setup-texlive-action@v3
-        with:
-          packages: scheme-full
+      # Render the .tex templates and emit resume.json. No TeX needed for this
+      # step — the LaTeX compile happens in the container action below.
+      - name: Render LaTeX + resume.json
+        run: python build.py --no-pdf
 
-      - name: Build PDF + JSON
-        run: python build.py
+      # Compiles build/cv.tex with lualatex inside a full TeX Live container, so
+      # every package the CV class needs (fontspec, fontawesome, tcolorbox,
+      # tikz, …) is already present. Outputs build/cv.pdf.
+      - name: Compile PDF
+        uses: xu-cheng/latex-action@v4
+        with:
+          working_directory: build
+          root_file: cv.tex
+          latexmk_use_lualatex: true
 
       - name: Publish to the "latest" release
         uses: softprops/action-gh-release@v2
